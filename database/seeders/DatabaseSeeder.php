@@ -19,26 +19,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::truncate();
-        Category::trucate();
-        Product::trucate();
-        Transaction::trucate();
-        DB::table('category_product')->truncate();
+        // User::truncate();
+        // Category::trucate();
+        // Product::trucate();
+        // Transaction::trucate();
+        // DB::table('category_product')->truncate();
 
-        $usersQuantity = 200;
-        $categoriesQuantity = 30;
-        $productsQuantity = 1000;
-        $transactionsQuantity = 1000;
+        // $usersQuantity = 200;
+        // $categoriesQuantity = 30;
+        // $productsQuantity = 1000;
+        // $transactionsQuantity = 1000;
 
-        User::factory()->create($usersQuantity);
-        Category::factory()->create($categoriesQuantity);
-        Product::factory()->create($productsQuantity)->each(
-            function ($product) {
-                $categories = Category::all()->random(mt_rand(1, 5))->pluck('id');
+        // User::factory($usersQuantity)->create();
+        // Category::factory($categoriesQuantity)->create();
+        // Product::factory($productsQuantity)->create()->each(
+        //     function ($product) {
+        //         $categories = Category::all()->random(mt_rand(1, 5))->pluck('id');
 
-                $product->categories()->attach($categories);
-            }
-        );
-        Transaction::factory()->create($transactionsQuantity);
+        //         $product->categories()->attach($categories);
+        //     }
+        // );
+        // Transaction::factory($transactionsQuantity)->create();
     }
 }
