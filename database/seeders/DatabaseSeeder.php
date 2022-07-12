@@ -2,8 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +19,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        User::truncate();
+        Category::trucate();
+        Product::trucate();
+        Transaction::trucate();
+        DB::table('category_product')->truncate();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $usersQuantity = 200;
+        $categoriesQuantity = 30;
+        $productsQuantity = 1000;
+        $transactionsQuantity = 1000;
+
+        User::factory()->create($usersQuantity);
+        Category::factory()->create($categoriesQuantity);
+        Product::factory()->create($productsQuantity)->each(
+            function ($product) {
+                $categories = Category::all()->random(mt_rand(1, 5))->pluck('id');
+
+                $product->categories()->attach($categories);
+            }
+        );
+        Transaction::factory()->create($transactionsQuantity);
     }
 }
