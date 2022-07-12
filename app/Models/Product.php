@@ -20,4 +20,9 @@ class Product extends Model
         'status',
         'image'
     ];
+
+    public function isAvailable()
+    {
+        return $this->status = Product::AVAILABLE_PRODUCT;
+    }
 }
