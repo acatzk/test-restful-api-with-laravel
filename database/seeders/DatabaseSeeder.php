@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
-use App\Models\Product;
-use App\Models\Transaction;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Transaction;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -19,18 +18,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         // User::truncate();
         // Category::trucate();
         // Product::trucate();
         // Transaction::trucate();
         // DB::table('category_product')->truncate();
 
-        // $usersQuantity = 200;
+        // $usersQuantity = 1000;
         // $categoriesQuantity = 30;
         // $productsQuantity = 1000;
         // $transactionsQuantity = 1000;
 
-        // User::factory($usersQuantity)->create();
+        // factory(User::class, $usersQuantity)->create();
+        // factory(User::class, $usersQuantity)->create();
+        // factory(User::class, $usersQuantity)->create();
+        // factory(User::class, $usersQuantity)->create();
         // Category::factory($categoriesQuantity)->create();
         // Product::factory($productsQuantity)->create()->each(
         //     function ($product) {
@@ -39,6 +42,6 @@ class DatabaseSeeder extends Seeder
         //         $product->categories()->attach($categories);
         //     }
         // );
-        // Transaction::factory($transactionsQuantity)->create();
+        // Transaction::factory($transactionsQuantity)->create();  
     }
 }
