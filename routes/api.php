@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Buyer\BuyerController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Product\ProductController;
@@ -64,4 +65,13 @@ Route::resource('transactions', TransactionController::class, ['only' => ['index
  * Users 
  * 
  */
-Route::resource('users', UserController::class, ['except' => ['create', 'edit']]);
+Route::resource('users', UserController::class, ['except' => ['store', 'create', 'edit']])->middleware('auth');
+
+
+/*
+ *
+ * Auththentication
+ * 
+ */
+Route::post('/auth/register', [AuthController::class, 'createUser']);
+Route::post('/auth/login', [AuthController::class, 'loginUser']);

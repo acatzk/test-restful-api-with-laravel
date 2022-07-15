@@ -28,33 +28,6 @@ class UserController extends ApiController
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $rules = [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed'
-        ];
-
-        $this->validate($request, $rules);
-
-        $data = $request->all();
-        $data['password'] = bcrypt($request->password);
-        $data['verified'] = User::UNVERIFIED_USER;
-        $data['verified_token'] = User::generateVerificationCode();
-        $data['admin'] = User::REGULAR_USER;
-
-        $user = User::create($data);
-
-        return $this->showOne($user, 201);
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
