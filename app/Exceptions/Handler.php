@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App\Traits\ApiResponser;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -49,6 +50,10 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
+        $this->renderable(function (ModelNotFoundException $e, $request) {
+            return $this->errorResponse('Does not exists any model with the specified indentificator', 404);
+        });
+
         $this->renderable(function (NotFoundHttpException $e, $request) {
             return $this->errorResponse('The specified URL cannot be found.', 403);
         });
