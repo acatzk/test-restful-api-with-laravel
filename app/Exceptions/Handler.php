@@ -3,7 +3,9 @@
 namespace App\Exceptions;
 
 use App\Traits\ApiResponser;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
@@ -53,6 +55,19 @@ class Handler extends ExceptionHandler
 
         $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
             return $this->errorResponse('The method for the requests is invalid.', 405);
+        });
+
+        $this->renderable(function (HttpException $e, $request) {
+            return $this->errorResponse($e->getMessage(), $e->getStatusCode());
+        });
+
+        $this->renderable(function (QueryException $e, $request) {
+            $errorCode = $e->errorInfo[1];
+
+            if ($errorCode === 1451) {
+                return $this->errorResponse('Cannot remove this resource permanently. It is related with any other resource', 409);
+            }
+
         });
     }
 }

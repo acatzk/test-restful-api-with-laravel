@@ -65,7 +65,7 @@ Route::resource('transactions', TransactionController::class, ['only' => ['index
  * Users 
  * 
  */
-Route::resource('users', UserController::class, ['except' => ['store', 'create', 'edit']])->middleware('auth');
+Route::resource('users', UserController::class, ['except' => ['store', 'create', 'edit']]);
 
 
 /*
