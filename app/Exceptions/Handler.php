@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use App\Traits\ApiResponser;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -48,6 +49,10 @@ class Handler extends ExceptionHandler
     {
         $this->renderable(function (NotFoundHttpException $e, $request) {
             return $this->errorResponse('The specified URL cannot be found.', 403);
+        });
+
+        $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
+            return $this->errorResponse('The method for the requests is invalid.', 405);
         });
     }
 }
