@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Buyer\BuyerController;
+use App\Http\Controllers\Buyer\BuyerTransactionController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Seller\SellerController;
@@ -27,8 +28,12 @@ use Illuminate\Support\Facades\Route;
  * Buyers 
  * 
  */
-
 Route::resource('buyers', BuyerController::class, ['only' => ['index', 'show']]);
+/*
+ * Buyers & Transactions
+ */
+Route::resource('buyers.transactions', BuyerTransactionController::class, ['only' => ['index']]);
+
 
 
 /*
