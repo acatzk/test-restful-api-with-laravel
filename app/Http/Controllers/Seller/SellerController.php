@@ -26,9 +26,9 @@ class SellerController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Seller $seller)
     {
-        $seller = Seller::has('transactions')->findOrFail($id);
+        // $seller = Seller::has('transactions')->findOrFail($id);
 
         return $this->showOne($seller);
     }
